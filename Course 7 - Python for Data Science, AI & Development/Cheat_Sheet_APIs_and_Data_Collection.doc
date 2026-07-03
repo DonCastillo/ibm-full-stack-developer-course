@@ -1,0 +1,181 @@
+
+<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+<head><meta charset='utf-8'><title>Cheat Sheet: APIs and Data Collection</title>
+<style>
+  body { font-family: Calibri, sans-serif; font-size: 11pt; margin: 40px; }
+  h1 { color: #2E74B5; font-size: 20pt; border-bottom: 2px solid #2E74B5; padding-bottom: 6px; }
+  h2 { color: #2E74B5; font-size: 13pt; margin-top: 18px; margin-bottom: 4px; }
+  p { margin: 4px 0 8px 0; }
+  pre { background: #f4f4f4; border: 1px solid #ccc; padding: 8px 12px; font-family: Consolas, monospace; font-size: 10pt; white-space: pre-wrap; }
+  .label { font-weight: bold; }
+  hr { border: none; border-top: 1px solid #ccc; margin: 12px 0; }
+</style>
+</head>
+<body>
+<h1>Cheat Sheet: APIs and Data Collection</h1>
+
+<h2>Accessing element attribute</h2>
+<p>Access the value of a specific attribute of an HTML element.</p>
+<p class="label">Syntax:</p>
+<pre>attribute = element[(attribute)]</pre>
+<p class="label">Example:</p>
+<pre>href = link_element[(href)]</pre>
+<hr/>
+
+<h2>BeautifulSoup()</h2>
+<p>Parse the HTML content of a web page using BeautifulSoup. The parser type can vary based on the project.</p>
+<p class="label">Syntax:</p>
+<pre>soup = BeautifulSoup(html, 'html.parser')</pre>
+<p class="label">Example:</p>
+<pre>html = requests.get('https://api.example.com/data').text
+soup = BeautifulSoup(html, 'html.parser')</pre>
+<hr/>
+
+<h2>delete()</h2>
+<p>Send a DELETE request to remove data or a resource from the server. DELETE requests delete a specified resource on the server.</p>
+<p class="label">Syntax:</p>
+<pre>response = requests.delete(url)</pre>
+<p class="label">Example:</p>
+<pre>response = requests.delete('https://api.example.com/delete')</pre>
+<hr/>
+
+<h2>find()</h2>
+<p>Find the first HTML element that matches the specified tag and attributes.</p>
+<p class="label">Syntax:</p>
+<pre>element = soup.find(tag, attrs)</pre>
+<p class="label">Example:</p>
+<pre>first_link = soup.find('a', {'class': 'link'})</pre>
+<hr/>
+
+<h2>find_all()</h2>
+<p>Find all HTML elements that match the specified tag and attributes.</p>
+<p class="label">Syntax:</p>
+<pre>elements = soup.find_all(tag, attrs)</pre>
+<p class="label">Example:</p>
+<pre>all_links = soup.find_all('a', {'class': 'link'})</pre>
+<hr/>
+
+<h2>findChildren()</h2>
+<p>Find all child elements of an HTML element.</p>
+<p class="label">Syntax:</p>
+<pre>children = element.findChildren()</pre>
+<p class="label">Example:</p>
+<pre>child_elements = parent_div.findChildren()</pre>
+<hr/>
+
+<h2>get()</h2>
+<p>Perform a GET request to retrieve data from a specified URL. GET requests are typically used for reading data from an API. The response variable will contain the server's response, which you can process further.</p>
+<p class="label">Syntax:</p>
+<pre>response = requests.get(url)</pre>
+<p class="label">Example:</p>
+<pre>response = requests.get('https://api.example.com/data')</pre>
+<hr/>
+
+<h2>Headers</h2>
+<p>Include custom headers in the request. Headers can provide additional information to the server, such as authentication tokens or content types.</p>
+<p class="label">Syntax:</p>
+<pre>headers = {'HeaderName': 'Value'}</pre>
+<p class="label">Example:</p>
+<pre>base_url = 'https://api.example.com/data'
+headers = {'Authorization': 'Bearer YOUR_TOKEN'}
+response = requests.get(base_url, headers=headers)</pre>
+<hr/>
+
+<h2>Import Libraries</h2>
+<p>Import the necessary Python libraries for web scraping.</p>
+<p class="label">Syntax:</p>
+<pre>from bs4 import BeautifulSoup</pre>
+<hr/>
+
+<h2>json()</h2>
+<p>Parse JSON data from the response. This extracts and works with the data returned by the API. The response.json() method converts the JSON response into a Python data structure, usually a dictionary or list.</p>
+<p class="label">Syntax:</p>
+<pre>data = response.json()</pre>
+<p class="label">Example:</p>
+<pre>response = requests.get('https://api.example.com/data')
+data = response.json()</pre>
+<hr/>
+
+<h2>next_sibling()</h2>
+<p>Find the next sibling element in the DOM.</p>
+<p class="label">Syntax:</p>
+<pre>sibling = element.find_next_sibling()</pre>
+<p class="label">Example:</p>
+<pre>next_sibling = current_element.find_next_sibling()</pre>
+<hr/>
+
+<h2>parent</h2>
+<p>Access the parent element in the Document Object Model (DOM).</p>
+<p class="label">Syntax:</p>
+<pre>parent = element.parent</pre>
+<p class="label">Example:</p>
+<pre>parent_div = paragraph.parent</pre>
+<hr/>
+
+<h2>post()</h2>
+<p>Send a POST request to a specified URL with data. Create or update POST requests using resources on the server. The data parameter contains the data to send to the server, often in JSON format.</p>
+<p class="label">Syntax:</p>
+<pre>response = requests.post(url, data)</pre>
+<p class="label">Example:</p>
+<pre>response = requests.post('https://api.example.com/submit', data={'key': 'value'})</pre>
+<hr/>
+
+<h2>put()</h2>
+<p>Send a PUT request to update data on the server. PUT requests are used to update an existing resource on the server with the data provided in the data parameter, typically in JSON format.</p>
+<p class="label">Syntax:</p>
+<pre>response = requests.put(url, data)</pre>
+<p class="label">Example:</p>
+<pre>response = requests.put('https://api.example.com/update', data={'key': 'value'})</pre>
+<hr/>
+
+<h2>Query parameters</h2>
+<p>Pass query parameters in the URL to filter or customize the request. Query parameters specify conditions or limits for the requested data.</p>
+<p class="label">Syntax:</p>
+<pre>params = {'param_name': 'value'}</pre>
+<p class="label">Example:</p>
+<pre>base_url = "https://api.example.com/data"
+params = {"page": 1, "per_page": 10}
+response = requests.get(base_url, params=params)</pre>
+<hr/>
+
+<h2>select()</h2>
+<p>Select HTML elements from the parsed HTML using a CSS selector.</p>
+<p class="label">Syntax:</p>
+<pre>element = soup.select(selector)</pre>
+<p class="label">Example:</p>
+<pre>titles = soup.select('h1')</pre>
+<hr/>
+
+<h2>status_code</h2>
+<p>Check the HTTP status code of the response. The HTTP status code indicates the result of the request (success, error, redirection). It can be used for error handling and decision-making in your code.</p>
+<p class="label">Syntax:</p>
+<pre>response.status_code</pre>
+<p class="label">Example:</p>
+<pre>url = "https://api.example.com/data"
+response = requests.get(url)
+status_code = response.status_code</pre>
+<hr/>
+
+<h2>tags for find() and find_all()</h2>
+<p>Specify any valid HTML tag as the tag parameter to search for elements of that type. Here are some common HTML tags:</p>
+<pre>- 'a'    : Find anchor tags.
+- 'p'    : Find paragraph tags.
+- 'h1' to 'h6' : Find heading tags (h1 through h6).
+- 'table': Find table tags.
+- 'tr'   : Find table row tags.
+- 'td'   : Find table cell tags.
+- 'th'   : Find table header cell tags.
+- 'img'  : Find image tags.
+- 'form' : Find form tags.
+- 'button': Find button tags.</pre>
+<hr/>
+
+<h2>text</h2>
+<p>Retrieve the text content of an HTML element.</p>
+<p class="label">Syntax:</p>
+<pre>text = element.text</pre>
+<p class="label">Example:</p>
+<pre>title_text = title_element.text</pre>
+
+</body>
+</html>
